@@ -3,6 +3,7 @@ using UnityEngine;
 public class BirdMovement : MonoBehaviour
 {
     public float speed = 25.0f;
+    public float vertSpeed = 525.0f;
     public float rotationSpeed = 90;
     public float force = 700f;
 
@@ -22,11 +23,6 @@ public class BirdMovement : MonoBehaviour
     void Update()
     {
         // Code derived from CS 426 Assignment One
-
-        if (inFlight)
-            rb.linearVelocity += this.transform.forward * speed * Time.deltaTime; //constant movement speed
-        else
-            rb.linearVelocity = this.transform.forward * 0; //placeholder for landing
         // Time.deltaTime represents the time that passed since the last frame
         //the multiplication below ensures that GameObject moves constant speed every frame
         if (Input.GetKey(KeyCode.W))
@@ -35,6 +31,19 @@ public class BirdMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.S))
             inFlight = false; //placeholder for landing
             //rb.linearVelocity -= this.transform.forward * speed * Time.deltaTime;
+
+        if (inFlight){
+            rb.linearVelocity = this.transform.forward * speed * Time.deltaTime; //constant movement speed
+            if(this.transform.position.y < 9.8 && rb.linearVelocity.y <= 0){
+                rb.linearVelocity += this.transform.up * vertSpeed * Time.deltaTime; //move up if y is below cruising altitude
+            } else if(rb.linearVelocity.y > 0){
+                rb.linearVelocity = this.transform.forward * speed * Time.deltaTime;
+            }
+        } else{
+            rb.linearVelocity = this.transform.forward * 0; //placeholder for landing
+            if(this.transform.position.y > 0.2)
+                rb.linearVelocity = this.transform.up * vertSpeed * Time.deltaTime * (-1); //move down if y is above the ground
+        }
 
         // Quaternion returns a rotation that rotates x degrees around the x axis and so on
         if (Input.GetKey(KeyCode.D))
