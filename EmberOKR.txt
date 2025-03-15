@@ -1,0 +1,6 @@
+Basic player movement by Wednesday 3/19
+Design for interactables (ammo, trees, etcetera) by Wednesday 3/26
+Enemy AI behavior - radiuses of interaction, skeleton of intended behavior by Wednesday 4/2
+Refined enemy AI - priorities of action, changing goals based on state and proximate objects by Wednesday 4/9
+Battlefield design - interactable placement, obstacles like hills and rivers by Wednesday 4/16
+Refined enemy pathfinding based on battlefield design by Wednesday 4/23
