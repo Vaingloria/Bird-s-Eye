@@ -6,6 +6,7 @@ public class BirdMovement : MonoBehaviour
     public float vertSpeed = 525.0f;
     public float rotationSpeed = 90;
     public float force = 700f;
+    public Vector3 up = new Vector3(0f, 100f, 0f);
 
     Rigidbody rb;
     Transform t;
