@@ -35,14 +35,14 @@ public class BirdMovement : MonoBehaviour
 
         if (inFlight){
             rb.linearVelocity = this.transform.forward * speed * Time.deltaTime; //constant movement speed
-            if(this.transform.position.y < 9.8 && rb.linearVelocity.y <= 0){
+            if(this.transform.position.y < 10.8 && rb.linearVelocity.y <= 0){
                 rb.linearVelocity += this.transform.up * vertSpeed * Time.deltaTime; //move up if y is below cruising altitude
             } else if(rb.linearVelocity.y > 0){
                 rb.linearVelocity = this.transform.forward * speed * Time.deltaTime;
             }
         } else{
             rb.linearVelocity = this.transform.forward * 0; //placeholder for landing
-            if(this.transform.position.y > 0.2)
+            if(this.transform.position.y > -0.1)
                 rb.linearVelocity = this.transform.up * vertSpeed * Time.deltaTime * (-1); //move down if y is above the ground
         }
 
@@ -51,5 +51,7 @@ public class BirdMovement : MonoBehaviour
             t.rotation *= Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0);
         else if (Input.GetKey(KeyCode.A))
             t.rotation *= Quaternion.Euler(0, - rotationSpeed * Time.deltaTime, 0);
+        //else
+            //t.rotation = Quaternion.Euler(0, t.rotation.y, 0);
     }
 }
