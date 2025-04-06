@@ -10,6 +10,7 @@ public class BirdMovement : MonoBehaviour
 
     Rigidbody rb;
     Transform t;
+    Animator anim;
     bool inFlight;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +18,7 @@ public class BirdMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         t = GetComponent<Transform>();
+        anim = GetComponent<Animator>();
         inFlight = true;
     }
 
@@ -47,11 +49,23 @@ public class BirdMovement : MonoBehaviour
         }
 
         // Quaternion returns a rotation that rotates x degrees around the x axis and so on
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D)){
             t.rotation *= Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0);
-        else if (Input.GetKey(KeyCode.A))
-            t.rotation *= Quaternion.Euler(0, - rotationSpeed * Time.deltaTime, 0);
-        //else
-            //t.rotation = Quaternion.Euler(0, t.rotation.y, 0);
+            anim.SetBool("Left", false);
+            anim.SetBool("Right", true);
+        } else {
+            if (Input.GetKey(KeyCode.A)){
+                t.rotation *= Quaternion.Euler(0, - rotationSpeed * Time.deltaTime, 0);
+                anim.SetBool("Left", true);
+                anim.SetBool("Right", false);
+            } else
+                anim.SetBool("Left", false);
+                anim.SetBool("Right", false);
+                //t.rotation = Quaternion.Euler(0, t.rotation.y, 0);
+        }
+
+        //todo - peck logic, if there is a corpse nearby and landed
+        anim.SetBool("Flight", inFlight);
+
     }
 }
