@@ -10,7 +10,7 @@ public class BirdMovement : MonoBehaviour
 
     Rigidbody rb;
     Transform t;
-    Animator anim;
+    public Animator anim;
     bool inFlight;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +18,7 @@ public class BirdMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         t = GetComponent<Transform>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         inFlight = true;
     }
 

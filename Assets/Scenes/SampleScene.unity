@@ -398,28 +398,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &216087201589100764
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216087201596535456}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0646ceebc81f52a4e8a676e94ab46092, type: 3}
-  m_Controller: {fileID: 9100000, guid: ceaa7aec4694652449eec52048fc815c, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!137 &216087201593425436
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -529,10 +507,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216087201596632896}
-  - component: {fileID: 216087201589100764}
   - component: {fileID: 216087201596632899}
   - component: {fileID: 216087201596632898}
   - component: {fileID: 216087201596632897}
+  - component: {fileID: 216087201596632901}
   m_Layer: 0
   m_Name: crow
   m_TagString: Untagged
@@ -566,6 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 216087201596632902}
   - component: {fileID: 216087201593425436}
+  - component: {fileID: 216087201596632903}
   m_Layer: 0
   m_Name: Crow
   m_TagString: Untagged
@@ -2079,6 +2058,7 @@ MonoBehaviour:
   rotationSpeed: 90
   force: 700
   up: {x: 0, y: 1000, z: 0}
+  anim: {fileID: 216087201596632901}
 --- !u!54 &216087201596632898
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2142,6 +2122,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 216087201596632906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &216087201596632901
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216087201596535456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0646ceebc81f52a4e8a676e94ab46092, type: 3}
+  m_Controller: {fileID: 9100000, guid: ceaa7aec4694652449eec52048fc815c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &216087201596632902
 Transform:
   m_ObjectHideFlags: 0
@@ -2157,6 +2159,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 216087201596632896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &216087201596632903
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216087201596535462}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 0646ceebc81f52a4e8a676e94ab46092, type: 3}
+  m_Controller: {fileID: 9100000, guid: ceaa7aec4694652449eec52048fc815c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &216087201596632904
 Transform:
   m_ObjectHideFlags: 0
