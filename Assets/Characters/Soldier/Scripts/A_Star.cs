@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class A_Star : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class A_Star : MonoBehaviour
         instance = this;
     }
 
-    public List<Node> GeneratePath(Node start, Node end)
+/*
+    public List<Node> GeneratePath(Node start, Node end) //commented this out because it was breaking everything
     {
         List<Node> openSet = new List<Node>();
 
@@ -63,4 +65,5 @@ public class A_Star : MonoBehaviour
         }
         return null;
     }
+*/
 }

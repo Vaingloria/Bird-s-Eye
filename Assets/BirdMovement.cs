@@ -12,12 +12,17 @@ public class BirdMovement : MonoBehaviour
     Transform t;
     public Animator anim;
     bool inFlight;
+    public AudioClip cry;
+    public AudioClip flight;
+    AudioSource audio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         t = GetComponent<Transform>();
+        audio = GetComponent<AudioSource>();
+        audio.playOnAwake = false;
         //anim = GetComponent<Animator>();
         inFlight = true;
     }
@@ -28,13 +33,17 @@ public class BirdMovement : MonoBehaviour
         // Code derived from CS 426 Assignment One
         // Time.deltaTime represents the time that passed since the last frame
         //the multiplication below ensures that GameObject moves constant speed every frame
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W)) {
+            if(inFlight == false){
+                audio.clip = flight;
+                audio.Play();
+            }
             inFlight = true; //placeholder for taking off, takes a moment to work fsr
             //rb.linearVelocity += this.transform.forward * speed * Time.deltaTime;
-        else if (Input.GetKey(KeyCode.S))
+        } else if (Input.GetKey(KeyCode.S)) {
             inFlight = false; //placeholder for landing
             //rb.linearVelocity -= this.transform.forward * speed * Time.deltaTime;
-
+        }
         if (inFlight){
             rb.linearVelocity = this.transform.forward * speed * Time.deltaTime; //constant movement speed
             if(this.transform.position.y < 10.8 && rb.linearVelocity.y <= 0){
@@ -62,6 +71,11 @@ public class BirdMovement : MonoBehaviour
                 anim.SetBool("Left", false);
                 anim.SetBool("Right", false);
                 //t.rotation = Quaternion.Euler(0, t.rotation.y, 0);
+        }
+
+        if(Input.GetKey(KeyCode.E)){ //press e to cry - more functionality to manipulate soldier AI goes here later
+            audio.clip = cry;
+            audio.Play();
         }
 
         //todo - peck logic, if there is a corpse nearby and landed

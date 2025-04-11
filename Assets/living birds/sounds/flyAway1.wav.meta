@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 9dabaef0cd2ecb241956e3db52d3bc8d
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15649
+  packageName: Living Birds
+  packageVersion: v1.2
+  assetPath: Assets/living birds/sounds/flyAway1.wav
+  uploadId: 22984
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +28,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 15649
-  packageName: Living Birds
-  packageVersion: v1.2
-  assetPath: Assets/living birds/sounds/flyAway1.wav
-  uploadId: 22984
