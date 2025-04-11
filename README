@@ -1,3 +1,5 @@
-Bird model and animations: https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649
+Bird model, audio, and animations: https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649
+Wind background audio: https://pixabay.com/sound-effects/soft-wind-318856/
 
 Ember AI/Mecanim: Bird behavior and corresponding animations, controlled by a Finite State Machine and Mecanim.
+Ember Audio: Bird takeoff and cry, as well as the always-playing ambient wind.
