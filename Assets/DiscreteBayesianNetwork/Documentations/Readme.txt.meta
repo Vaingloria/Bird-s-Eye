@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: a705ae372791cea4ea631d34b9c48ea4
+labels:
+- ArtificialIntelligence
+- AI
+- BayesianNetwork
+- Bayesianet
+timeCreated: 1461540683
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 61312
+  packageName: Discrete Bayesian Network
+  packageVersion: 1.0.0
+  assetPath: Assets/DiscreteBayesianNetwork/Documentations/Readme.txt
+  uploadId: 205744

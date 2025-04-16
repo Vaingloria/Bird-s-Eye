@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: c40531d4b10c7bc46b4f154cfad09c0b
+labels:
+- Code
+- ArtificialIntelligence
+- AI
+- BayesianNetwork
+- Bayesianet
+timeCreated: 1461154693
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 61312
+  packageName: Discrete Bayesian Network
+  packageVersion: 1.0.0
+  assetPath: Assets/DiscreteBayesianNetwork/Example/GameManager.cs
+  uploadId: 205744

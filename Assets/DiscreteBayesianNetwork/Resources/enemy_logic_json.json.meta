@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 05796c2ab7c319041887fb196ef6a31a
+labels:
+- ArtificialIntelligence
+- AI
+- BayesianNetwork
+- Bayesianet
+timeCreated: 1462689931
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 61312
+  packageName: Discrete Bayesian Network
+  packageVersion: 1.0.0
+  assetPath: Assets/DiscreteBayesianNetwork/Resources/enemy_logic_json.json
+  uploadId: 205744
