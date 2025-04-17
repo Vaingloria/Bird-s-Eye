@@ -4,6 +4,7 @@ Wind background audio: https://pixabay.com/sound-effects/soft-wind-318856/
 Ember AI/Mecanim: Bird behavior and corresponding animations, controlled by a Finite State Machine and Mecanim.
 Ember Audio: Bird takeoff and cry, as well as the always-playing ambient wind.
 Ember UI: Score display, control display, control on/off
+Ember Shader: Custom shader Tree Shader and Tree Shader 2, Tree Shader 2 is applied to Tree 9_4 to give a more yellowy fall color
 
 Afeef AI/Mecanim: Soldier behavior and animations controlled by when enemy troops see eachother. Used Team mechanics to determine enemy teams
 Afeef bullet prefab: Added a bullet prefab to decrease health of the npc soldiers
