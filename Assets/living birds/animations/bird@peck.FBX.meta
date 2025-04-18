@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 45df0147da930de4aa376948b6bf0ee7
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15649
+  packageName: Living Birds
+  packageVersion: v1.2
+  assetPath: Assets/living birds/animations/bird@peck.FBX
+  uploadId: 22984
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -441,7 +448,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -533,10 +540,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 15649
-  packageName: Living Birds
-  packageVersion: v1.2
-  assetPath: Assets/living birds/animations/bird@peck.FBX
-  uploadId: 22984

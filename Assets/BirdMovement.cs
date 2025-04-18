@@ -44,7 +44,9 @@ public class BirdMovement : MonoBehaviour
             inFlight = false; //placeholder for landing
             //rb.linearVelocity -= this.transform.forward * speed * Time.deltaTime;
         }
+
         if (inFlight){
+            anim.SetBool("Peck", false);
             rb.linearVelocity = this.transform.forward * speed * Time.deltaTime; //constant movement speed
             if(this.transform.position.y < 10.8 && rb.linearVelocity.y <= 0){
                 rb.linearVelocity += this.transform.up * vertSpeed * Time.deltaTime; //move up if y is below cruising altitude
@@ -79,7 +81,11 @@ public class BirdMovement : MonoBehaviour
         }
 
         //todo - peck logic, if there is a corpse nearby and landed
-        anim.SetBool("Flight", inFlight);
+        anim.SetBool("Flight", (inFlight || this.transform.position.y > 3.2)); //does not initiate landing animation until near ground
+
+        if(!anim.GetBool("Flight") && Input.GetKey(KeyCode.Q)){
+            anim.SetBool("Peck", true);
+        }
 
     }
 }
