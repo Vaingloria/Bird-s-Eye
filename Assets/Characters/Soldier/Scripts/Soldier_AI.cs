@@ -6,11 +6,14 @@ public class Soldier_AI : MonoBehaviour
     public enum Team { Red, Blue }
     public Team myTeam;
 
+    [Header("Combat Settings")]
     public float health = 100f;
     public float shootRange = 25f;
     public float shootRate = 1f;
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    [Header("Animation & Targeting")]
     public LayerMask enemyLayer;
     public Animator animator;
 
@@ -23,6 +26,20 @@ public class Soldier_AI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         shootTimer = shootRate;
+
+        if (agent == null)
+        {
+            Debug.LogError($"{gameObject.name} is missing a NavMeshAgent!");
+            enabled = false;
+            return;
+        }
+
+        if (!agent.isOnNavMesh)
+        {
+            Debug.LogError($"{gameObject.name} is not placed on the NavMesh!");
+            enabled = false;
+            return;
+        }
     }
 
     void Update()
@@ -91,6 +108,7 @@ public class Soldier_AI : MonoBehaviour
     {
         Vector3 direction = (target.position - transform.position).normalized;
         direction.y = 0;
+
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -111,6 +129,8 @@ public class Soldier_AI : MonoBehaviour
 
     void UpdateAnimatorMovementParams()
     {
+        if (agent == null || animator == null) return;
+
         Vector3 velocity = agent.velocity;
         Vector3 localVelocity = transform.InverseTransformDirection(velocity);
 
