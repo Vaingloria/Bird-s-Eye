@@ -149,30 +149,37 @@ public class Soldier_AI : MonoBehaviour
 
     void HandleMovementAndCombat()
     {
+        Debug.Log($"{gameObject.name} is FORCIBLY SHOOTING!");
+        Shoot();  // Temporarily bypass timer
+
         if (target == null)
         {
+            Debug.LogWarning($"{gameObject.name} has no target. isShooting = false");
             animator.SetBool("isShooting", false);
             agent.ResetPath();
-            Debug.Log("isShooting is False");
             return;
         }
         float distance = Vector3.Distance(transform.position, target.position);
         float engageBuffer = 1.5f;
         Debug.Log($"{gameObject.name} distance to target: {distance}");
 
-        if (distance > shootRange)// - engageBuffer)
+        if (distance > shootRange + 0.5f)// - engageBuffer)
         {
+            Debug.Log($"{gameObject.name} is chasing target...");
             agent.SetDestination(target.position);
             animator.SetBool("isShooting", false);
+            //Debug.Log($"{gameObject.name} is moving to target");    
         }
         else
         {
+            Debug.Log($"{gameObject.name} is within shooting range!");
             agent.ResetPath();
             FaceTarget();
-
             shootTimer -= Time.deltaTime;
+            Debug.Log($"{gameObject.name} shootTimer: {shootTimer}");
             if (shootTimer <= 0f)
             {
+                Debug.Log($"{gameObject.name} is SHOOTING!");
                 Shoot();
                 shootTimer = shootRate;
             }
@@ -192,6 +199,7 @@ public class Soldier_AI : MonoBehaviour
 
     void Shoot()
     {
+        Debug.Log($"{gameObject.name} is calling Shoot()");
         if (bulletPrefab && firePoint && target != null)
         {
             animator.SetBool("isShooting", true);

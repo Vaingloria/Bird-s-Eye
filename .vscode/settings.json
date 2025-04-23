@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Bird's Eye.sln"
+    "dotnet.defaultSolution": "Bird-s-Eye.sln"
 }
