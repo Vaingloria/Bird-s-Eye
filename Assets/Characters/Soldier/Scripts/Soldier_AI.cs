@@ -74,55 +74,32 @@ public class Soldier_AI : MonoBehaviour
     void FindTarget()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, visionRange, enemyLayer);
-        Debug.Log($"{gameObject.name} found {hits.Length} object(s) in enemy layer.");
-
         float closest = Mathf.Infinity;
         Transform bestTarget = null;
 
         foreach (var hit in hits)
         {
-            Debug.Log($"→ Hit: {hit.name}, Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
-
             Soldier_AI other = hit.GetComponent<Soldier_AI>();
-            if (other == null) Debug.Log("✖ No Soldier_AI found.");
-            else if (other.isDead) Debug.Log("✖ Enemy is dead.");
-            else if (other.myTeam == myTeam) Debug.Log("✖ Same team.");
-            else Debug.Log($"✅ Valid enemy: {hit.name}");
-            // Debug.Log($"Hit: {hit.name}, Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
+            Debug.Log($"{gameObject.name} -> Hit: {hit.name}, Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
 
-            // Soldier_AI other = hit.GetComponent<Soldier_AI>();
-            // if (other == null)
-            // {
-            //     Debug.Log("✖ No Soldier_AI script found.");
-            //     continue;
-            // }
-            // if (other.myTeam == this.myTeam)
-            // {
-            //     Debug.Log("✖ Same team.");
-            //     continue;
-            // }
-            // if (other.isDead)
-            // {
-            //     Debug.Log("✖ Target is dead.");
-            //     continue;
-            // }
-
-            // Debug.Log($"✅ Valid enemy: {hit.name}");
-            // float distance = Vector3.Distance(transform.position, hit.transform.position);
-            // if (distance < closest)
-            // {
-            //     closest = distance;
-            //     bestTarget = hit.transform;
-            // }
+            if (other != null && other.myTeam != this.myTeam && !other.isDead)
+            {
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                if (distance < closest)
+                {
+                    closest = distance;
+                    bestTarget = hit.transform;
+                    Debug.Log($"✅ Valid enemy: {hit.name}");
+                }
+            }
         }
 
         target = bestTarget;
 
         if (target == null)
             Debug.LogWarning($"{gameObject.name} found NO valid target.");
-        else
-            Debug.Log($"{gameObject.name} has targeted: {target.name}");
     }
+
 
     // void FindTarget()
     // {
@@ -149,8 +126,8 @@ public class Soldier_AI : MonoBehaviour
 
     void HandleMovementAndCombat()
     {
-        Debug.Log($"{gameObject.name} is FORCIBLY SHOOTING!");
-        Shoot();  // Temporarily bypass timer
+        // Debug.Log($"{gameObject.name} is FORCIBLY SHOOTING!");
+        // Shoot();  // Temporarily bypass timer
 
         if (target == null)
         {
@@ -197,22 +174,33 @@ public class Soldier_AI : MonoBehaviour
         }
     }
 
-    void Shoot()
+   void Shoot()
     {
-        Debug.Log($"{gameObject.name} is calling Shoot()");
-        if (bulletPrefab && firePoint && target != null)
+        if (bulletPrefab == null)
         {
-            animator.SetBool("isShooting", true);
-            Debug.Log($"{gameObject.name} is shooting at {target.name}");
+            Debug.LogWarning($"{gameObject.name} is missing bulletPrefab!");
+            return;
+        }
 
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            bullet.GetComponent<Bullet>().SetTarget(target);
-        }
-        else
+        if (firePoint == null)
         {
-            Debug.LogWarning($"{gameObject.name} attempted to shoot but missing bulletPrefab or firePoint.");
+            Debug.LogWarning($"{gameObject.name} is missing firePoint!");
+            return;
         }
+
+        if (target == null)
+        {
+            Debug.LogWarning($"{gameObject.name} has no target.");
+            return;
+        }
+
+        animator.SetBool("isShooting", true);
+        Debug.Log($"{gameObject.name} is SHOOTING at {target.name}");
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<Bullet>().SetTarget(target);
     }
+
 
     void UpdateAnimatorMovementParams()
     {
