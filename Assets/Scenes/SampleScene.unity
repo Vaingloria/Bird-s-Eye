@@ -4490,7 +4490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c51bd2c97de2164182a60a816d79d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2000
+  speed: 1600
   vertSpeed: 525
   rotationSpeed: 90
   force: 700
@@ -4523,7 +4523,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &216087201596632899
 BoxCollider:
