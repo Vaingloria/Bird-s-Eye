@@ -1728,6 +1728,7 @@ GameObject:
   - component: {fileID: 1797545697}
   - component: {fileID: 1797545699}
   - component: {fileID: 1797545698}
+  - component: {fileID: 1797545700}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -1853,6 +1854,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797545696}
   m_CullTransparentMesh: 1
+HEAD
 --- !u!1 &1885821068 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4217103897255052922, guid: 98d42e171b91d1244930c7776ac0269f, type: 3}
@@ -1863,6 +1865,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4753845793012790387, guid: 98d42e171b91d1244930c7776ac0269f, type: 3}
   m_PrefabInstance: {fileID: 5391528619190503633}
   m_PrefabAsset: {fileID: 0}
+
+--- !u!114 &1797545700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797545696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f1b0123dfb650418f06cf1470942f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+ c7ea7e8a2163fe94727dd2110d8497c8fa3a5a9a
 --- !u!1001 &1941159405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4417,14 +4433,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c51bd2c97de2164182a60a816d79d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2000
+  speed: 1600
   vertSpeed: 525
   rotationSpeed: 90
   force: 700
   up: {x: 0, y: 1000, z: 0}
+  Soldier: {fileID: -8679921383154817045, guid: 2a8151b1f68947a4d86a42f5f8adac99, type: 3}
   anim: {fileID: 216087201596632901}
   cry: {fileID: 8300000, guid: e2622b95524aab94b9a0448a1a4c6fc8, type: 3}
   flight: {fileID: 8300000, guid: 9dabaef0cd2ecb241956e3db52d3bc8d, type: 3}
+  scoretext: {fileID: 1797545698}
 --- !u!54 &216087201596632898
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4450,7 +4468,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &216087201596632899
 BoxCollider:

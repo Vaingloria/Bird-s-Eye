@@ -30,7 +30,7 @@ public class Soldier_AI : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform target;
-    private bool isDead = false;
+    public bool isDead = false;
     private float shootTimer;
     private int currentPatrolIndex = 0;
     private float patrolWaitTimer = 0f;

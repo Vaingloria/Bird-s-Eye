@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BirdMovement : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class BirdMovement : MonoBehaviour
     public float rotationSpeed = 90;
     public float force = 700f;
     public Vector3 up = new Vector3(0f, 100f, 0f);
+    public Transform Soldier;
 
     Rigidbody rb;
     Transform t;
@@ -15,6 +18,9 @@ public class BirdMovement : MonoBehaviour
     public AudioClip cry;
     public AudioClip flight;
     AudioSource audio;
+
+    public TMP_Text scoretext;
+    public static float score;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +31,7 @@ public class BirdMovement : MonoBehaviour
         audio.playOnAwake = false;
         //anim = GetComponent<Animator>();
         inFlight = true;
+        score = 0;
     }
 
     // Update is called once per frame
@@ -80,11 +87,26 @@ public class BirdMovement : MonoBehaviour
             audio.Play();
         }
 
-        //todo - peck logic, if there is a corpse nearby and landed
         anim.SetBool("Flight", (inFlight || this.transform.position.y > 3.2)); //does not initiate landing animation until near ground
 
         if(!anim.GetBool("Flight") && Input.GetKey(KeyCode.Q)){
             anim.SetBool("Peck", true);
+        }
+
+        if(anim.GetBool("Peck")){
+            Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5);
+            for(int i = 0; i < hitColliders.Length; i++){
+                GameObject obj = hitColliders[i].gameObject;
+                Soldier_AI sol = obj.GetComponent<Soldier_AI>();
+                if(sol != null && sol.isDead){
+                    score += Time.deltaTime;
+                    scoretext.GetComponent<TMP_Text>().text = "Score: " + ((int)score).ToString();
+                    if(score >= 20.0){
+                        SceneManager.LoadScene("Credits");
+                    }
+                }
+            }
+            //check if corpse is nearby, if so update score
         }
 
     }
