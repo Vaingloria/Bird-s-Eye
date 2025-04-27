@@ -96,8 +96,9 @@ public class BirdMovement : MonoBehaviour
         if(anim.GetBool("Peck")){
             Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5);
             for(int i = 0; i < hitColliders.Length; i++){
-                CapsuleCollider sol = (hitColliders[i] as CapsuleCollider);
-                if(sol != null){
+                GameObject obj = hitColliders[i].gameObject;
+                Soldier_AI sol = obj.GetComponent<Soldier_AI>();
+                if(sol != null && sol.isDead){
                     score += Time.deltaTime;
                     scoretext.GetComponent<TMP_Text>().text = "Score: " + ((int)score).ToString();
                     if(score >= 20.0){
