@@ -1,5 +1,7 @@
 Bird model, audio, and animations: https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649
 Wind background audio: https://pixabay.com/sound-effects/soft-wind-318856/
+Soldier Shooting Audio: https://assetstore.unity.com/packages/audio/sound-fx/weapons/weapons-of-choice-free-101807#content
+Soldier Footstep Audio: https://assetstore.unity.com/packages/audio/sound-fx/classic-footstep-sfx-173668
 
 Ember AI/Mecanim: Bird behavior and corresponding animations, controlled by a Finite State Machine and Mecanim.
 Ember Audio: Bird takeoff and cry, as well as the always-playing ambient wind.
@@ -7,5 +9,7 @@ Ember UI: Score display, control display, control on/off
 Ember Shader: Custom shader Tree Shader and Tree Shader 2, Tree Shader 2 is applied to Tree 9_4 to give a more yellowy fall color
 Ember Text: Title screen, credits
 
-Afeef AI/Mecanim: Soldier behavior and animations controlled by when enemy troops see eachother. Used Team mechanics to determine enemy teams
+Afeef AI/Mecanim: Soldier behavior and animations are controlled by when enemy troops see each other. Used team mechanics to determine enemy teams, debugged soldiers to ensure they work properly, i.e., run and shoot when within range, and played animations accordingly.
 Afeef bullet prefab: Added a bullet prefab to decrease health of the npc soldiers
+Afeef Audio: Add in shooting sound effects
+Afeef Shader: Add in the shaders to the soldiers

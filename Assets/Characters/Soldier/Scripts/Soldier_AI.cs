@@ -31,9 +31,18 @@ public class Soldier_AI : MonoBehaviour
     private NavMeshAgent agent;
     private Transform target;
     public bool isDead = false;
+    public bool IsDead => isDead;
+
     private float shootTimer;
     private int currentPatrolIndex = 0;
     private float patrolWaitTimer = 0f;
+
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip shootClip;
+    public AudioClip runClip;
+    public AudioClip deathClip;
+
 
     void Start()
     {
@@ -126,34 +135,52 @@ public class Soldier_AI : MonoBehaviour
 
     void HandleMovementAndCombat()
     {
-        // Debug.Log($"{gameObject.name} is FORCIBLY SHOOTING!");
-        // Shoot();  // Temporarily bypass timer
+        if (isDead)
+        {
+            agent.isStopped = true;
+            animator.SetBool("isShooting", false);
+            return;
+        }
+
+        // --- SINGLE clear dead-check here
+        if (target != null)
+        {
+            Soldier_AI targetSoldier = target.GetComponent<Soldier_AI>();
+            if (targetSoldier == null || targetSoldier.isDead)
+            {
+                Debug.Log($"{gameObject.name}: Target {target?.name} is dead or missing. Clearing target.");
+                target = null;
+                animator.SetBool("isShooting", false);
+                agent.ResetPath();
+                return;
+            }
+        }
 
         if (target == null)
         {
-            Debug.LogWarning($"{gameObject.name} has no target. isShooting = false");
             animator.SetBool("isShooting", false);
             agent.ResetPath();
             return;
         }
+
         float distance = Vector3.Distance(transform.position, target.position);
-        float engageBuffer = 1.5f;
         Debug.Log($"{gameObject.name} distance to target: {distance}");
 
-        if (distance > shootRange + 0.5f)// - engageBuffer)
+        if (distance > shootRange + 0.5f)
         {
             Debug.Log($"{gameObject.name} is chasing target...");
             agent.SetDestination(target.position);
             animator.SetBool("isShooting", false);
-            //Debug.Log($"{gameObject.name} is moving to target");    
         }
         else
         {
             Debug.Log($"{gameObject.name} is within shooting range!");
             agent.ResetPath();
             FaceTarget();
+
             shootTimer -= Time.deltaTime;
             Debug.Log($"{gameObject.name} shootTimer: {shootTimer}");
+
             if (shootTimer <= 0f)
             {
                 Debug.Log($"{gameObject.name} is SHOOTING!");
@@ -162,6 +189,7 @@ public class Soldier_AI : MonoBehaviour
             }
         }
     }
+
 
     void FaceTarget()
     {
@@ -176,35 +204,66 @@ public class Soldier_AI : MonoBehaviour
 
    void Shoot()
     {
-        if (bulletPrefab == null)
-        {
-            Debug.LogWarning($"{gameObject.name} is missing bulletPrefab!");
-            return;
-        }
+        if (isDead) return;
 
-        if (firePoint == null)
-        {
-            Debug.LogWarning($"{gameObject.name} is missing firePoint!");
+        if (bulletPrefab == null || firePoint == null || target == null)
             return;
-        }
-
-        if (target == null)
-        {
-            Debug.LogWarning($"{gameObject.name} has no target.");
-            return;
-        }
 
         animator.SetBool("isShooting", true);
         Debug.Log($"{gameObject.name} is SHOOTING at {target.name}");
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Bullet>().SetTarget(target);
+
+        if (audioSource != null && shootClip != null)
+        {
+            audioSource.PlayOneShot(shootClip);
+        }
     }
+
+    // {
+    //     if (isDead) return;
+
+    //     if (bulletPrefab == null)
+    //     {
+    //         Debug.LogWarning($"{gameObject.name} is missing bulletPrefab!");
+    //         return;
+    //     }
+
+    //     if (firePoint == null)
+    //     {
+    //         Debug.LogWarning($"{gameObject.name} is missing firePoint!");
+    //         return;
+    //     }
+
+    //     if (target == null)
+    //     {
+    //         Debug.LogWarning($"{gameObject.name} has no target.");
+    //         return;
+    //     }
+
+    //     // NEW: Don't shoot dead bodies
+    //     Soldier_AI targetSoldier = target.GetComponent<Soldier_AI>();
+    //     if (targetSoldier == null || targetSoldier.isDead)
+    //     {
+    //         Debug.LogWarning($"{gameObject.name} tried to shoot a dead or missing target. Cancelling shoot.");
+    //         animator.SetBool("isShooting", false);
+    //         target = null;
+    //         return;
+    //     }
+
+    //     animator.SetBool("isShooting", true);
+    //     Debug.Log($"{gameObject.name} is SHOOTING at {target.name}");
+
+    //     GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    //     bullet.GetComponent<Bullet>().SetTarget(target);
+    // }
+
 
 
     void UpdateAnimatorMovementParams()
     {
-        if (agent == null || animator == null) return;
+        if (agent == null || animator == null || isDead) return;
 
         Vector3 velocity = agent.velocity;
         Vector3 localVelocity = transform.InverseTransformDirection(velocity);
@@ -241,7 +300,7 @@ public class Soldier_AI : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        if (isDead) return;
+        //if (isDead) return;
 
         health -= amount;
         if (health <= 0f)
@@ -252,12 +311,43 @@ public class Soldier_AI : MonoBehaviour
 
     void Die()
     {
+        Debug.Log($"{gameObject.name} is dead");
+        if (isDead) return;
+
         isDead = true;
-        agent.enabled = false;
-        animator.SetTrigger("die");
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            agent.ResetPath();
+            agent.enabled = false;
+        }
+
+        if (animator != null)
+        {
+            animator.SetFloat("moveX", 0f);
+            animator.SetFloat("moveZ", 0f);
+            animator.SetBool("isShooting", false);
+            animator.SetTrigger("die");
+        }
+
+        if (audioSource != null && deathClip != null)
+        {
+            audioSource.PlayOneShot(deathClip);
+        }
+
         DropAmmoBox();
         Destroy(gameObject, 4f);
     }
+
+    // {
+    //     isDead = true;
+    //     agent.enabled = false;
+    //     animator.SetTrigger("die");
+    //     DropAmmoBox();
+    //     Destroy(gameObject, 4f);
+    // }
+
 
     void DropAmmoBox()
     {
