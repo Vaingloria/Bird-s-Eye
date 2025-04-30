@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class BirdMovement : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class BirdMovement : MonoBehaviour
             }
         } else{
             rb.linearVelocity = this.transform.forward * 0; //placeholder for landing
-            if(this.transform.position.y > -0.1)
+            if(this.transform.position.y > 0.3)
                 rb.linearVelocity = this.transform.up * vertSpeed * Time.deltaTime * (-1); //move down if y is above the ground
         }
 
@@ -98,10 +99,11 @@ public class BirdMovement : MonoBehaviour
             for(int i = 0; i < hitColliders.Length; i++){
                 GameObject obj = hitColliders[i].gameObject;
                 Soldier_AI sol = obj.GetComponent<Soldier_AI>();
-                if(sol != null && sol.IsDead){
-                    score += Time.deltaTime;
+                if(sol != null && sol.IsDead && sol.edible){
+                    score += 1;
                     scoretext.GetComponent<TMP_Text>().text = "Score: " + ((int)score).ToString();
-                    if(score >= 20.0){
+                    sol.edible = false;
+                    if(score >= 5.0){
                         SceneManager.LoadScene("Credits");
                     }
                 }

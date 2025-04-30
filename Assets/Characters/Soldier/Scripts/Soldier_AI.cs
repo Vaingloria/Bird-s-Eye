@@ -25,6 +25,8 @@ public class Soldier_AI : MonoBehaviour
     public bool IsDead => isDead;
     private Transform target;
 
+    public bool edible = true;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
