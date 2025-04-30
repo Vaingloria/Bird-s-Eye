@@ -98,7 +98,7 @@ public class BirdMovement : MonoBehaviour
             for(int i = 0; i < hitColliders.Length; i++){
                 GameObject obj = hitColliders[i].gameObject;
                 Soldier_AI sol = obj.GetComponent<Soldier_AI>();
-                if(sol != null && sol.isDead){
+                if(sol != null && sol.IsDead){
                     score += Time.deltaTime;
                     scoretext.GetComponent<TMP_Text>().text = "Score: " + ((int)score).ToString();
                     if(score >= 20.0){
